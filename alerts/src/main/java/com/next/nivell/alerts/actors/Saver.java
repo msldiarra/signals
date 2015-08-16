@@ -1,32 +1,15 @@
 package com.next.nivell.alerts.actors;
 
-import akka.actor.UntypedActor;
-import com.next.nivell.alerts.model.Alert;
+import javax.validation.Constraint;
+import javax.validation.ReportAsSingleViolation;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import java.util.logging.Logger;
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class Saver extends UntypedActor {
-
-    private final Logger LOGGER = Logger.getLogger(Saver.class.getName());
-
-    public static enum Msg {
-        SAVED;
-    }
-
-    @Override
-    public void onReceive(Object message) {
-
-        if (message instanceof Alert) {
-
-            save((Alert) message);
-            getSender().tell(Msg.SAVED, getSelf());
-        } else {
-            unhandled(message);
-        }
-    }
-
-
-    private void save(Alert alert) {
-        LOGGER.info("Alert saved");
-    }
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+@Retention(RUNTIME)
+public @interface Saver {
 }

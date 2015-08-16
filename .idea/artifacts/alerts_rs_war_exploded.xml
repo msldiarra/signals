@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="alerts-rs:war exploded">
+    <output-path>$PROJECT_DIR$/alerts-rs/target/alerts-rs</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="alerts-rs/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="alerts-rs" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="alerts-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="alerts" />
+          </element>
+          <element id="library" level="project" name="Maven: com.typesafe.akka:akka-actor_2.10:2.3.6" />
+          <element id="library" level="project" name="Maven: org.scala-lang:scala-library:2.10.4" />
+          <element id="library" level="project" name="Maven: com.typesafe:config:1.2.1" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

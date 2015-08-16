@@ -1,26 +1,12 @@
 package com.next.nivell.alerts.actors;
 
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.actor.UntypedActor;
-import com.next.nivell.alerts.model.Alert;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.UUID;
-import java.util.logging.Logger;
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class Store extends UntypedActor {
-
-    private final Logger LOGGER = Logger.getLogger(Store.class.getName());
-
-    @Override
-    public void onReceive(Object msg) {
-        if (msg == Saver.Msg.SAVED) {
-            // when the greeter is done, stop this actor and with it the application
-            LOGGER.info("stopping actor");
-            getContext().stop(getSelf());
-        } else
-            unhandled(msg);
-    }
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+@Retention(RUNTIME)
+public @interface Store {
 }

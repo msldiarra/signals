@@ -12,8 +12,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <name>system</name>
-    <artifactId>system</artifactId>
+    <name>alerts-rs</name>
+    <artifactId>alerts-rs</artifactId>
 
     <packaging>war</packaging>
 
@@ -23,6 +23,7 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.next.nivell</groupId>
@@ -44,6 +45,7 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <configuration>
+                    <server-config>standalone-full.xml</server-config>
                     <filename>${project.parent.artifactId}-${project.artifactId}.war</filename>
                 </configuration>
             </plugin>
