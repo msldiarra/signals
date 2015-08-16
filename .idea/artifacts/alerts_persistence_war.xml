@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="alerts-persistence:war">
+    <output-path>$PROJECT_DIR$/alerts-persistence/target</output-path>
+    <root id="archive" name="signals-alerts-persistence.war">
+      <element id="artifact" artifact-name="alerts-persistence:war exploded" />
+    </root>
+  </artifact>
+</component>

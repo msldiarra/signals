@@ -49,16 +49,14 @@ public class Alerts {
     @Path("/add")
     public Response add() {
 
-        LOGGER.info("saving  alerts");
-
         Alert alert = new Alert();
         alert.setTankReference("A000000001");
         alert.setLevel(new BigDecimal(12));
         alert.setTime(new Date());
 
-
         jmsContext.createProducer().send(demoQueue, alert);
 
+        LOGGER.info("Pushing  alert in queue : {} : ", alert);
 
         return Response.ok(alert.toString()).build();
     }

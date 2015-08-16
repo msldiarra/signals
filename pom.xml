@@ -14,6 +14,7 @@
     <modules>
         <module>alerts</module>
         <module>alerts-rs</module>
+        <module>alerts-persistence</module>
     </modules>
 
     <properties>

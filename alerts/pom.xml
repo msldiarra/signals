@@ -66,8 +66,9 @@
                         <artifactId>flyway-maven-plugin</artifactId>
                         <version>3.2.1</version>
                         <configuration>
-                            <url>jdbc:mysql://localhost:3306/signals</url>
-                            <user>root</user>
+                            <driver>org.postgresql.Driver</driver>
+                            <url>jdbc:postgresql://localhost/signals</url>
+                            <user>postgres</user>
                             <password>1234</password>
                             <locations>
                                 <location>filesystem:src/main/resources/db/migration</location>
@@ -75,10 +76,15 @@
                         </configuration>
                         <dependencies>
                             <dependency>
+                                <groupId>org.postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>9.4-1200-jdbc41</version>
+                            </dependency>
+                            <!--dependency>
                                 <groupId>mysql</groupId>
                                 <artifactId>mysql-connector-java</artifactId>
                                 <version>5.1.36</version>
-                            </dependency>
+                            </dependency-->
                         </dependencies>
                     </plugin>
                 </plugins>
