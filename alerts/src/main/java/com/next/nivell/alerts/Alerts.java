@@ -38,21 +38,8 @@ public class Alerts {
     public Alerts() {
     }
 
-    @GET
-    @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String count() {
-        return "OK";
-    }
-
     @POST
-    @Path("/add")
-    public Response add() {
-
-        Alert alert = new Alert();
-        alert.setTankReference("A000000001");
-        alert.setLevel(new BigDecimal(12));
-        alert.setTime(new Date());
+    public Response create(Alert alert) {
 
         jmsContext.createProducer().send(demoQueue, alert);
 
