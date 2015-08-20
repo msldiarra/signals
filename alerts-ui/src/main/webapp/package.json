@@ -1,0 +1,22 @@
+{
+  "name": "nivell",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.1",
+    "flux": "^2.1.1",
+    "gulp": "^3.9.0",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "vinyl-source-stream": "^1.1.0",
+    "when": "^3.7.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
