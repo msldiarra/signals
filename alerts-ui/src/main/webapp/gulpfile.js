@@ -5,13 +5,13 @@ var source = require('vinyl-source-stream');
 
 gulp.task('browserify', function () {
     browserify({
-        entries: './src/js/main.js',
+        entries: './src/js/app.js',
         extensions: ['.js'],
         debug: true
     })
         .transform(babelify)
         .bundle()
-        .pipe(source('main.js'))
+        .pipe(source('app.js'))
         .pipe(gulp.dest('dist/js'));
 });
 
