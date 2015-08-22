@@ -119,10 +119,17 @@ SELECT m.id, t.reference AS tankReference, m.level, m.time
 FROM Measure m
 INNER JOIN Tank t ON (t.id = m.id);
 
-CREATE RULE Meausre_INSERT AS ON INSERT TO Alert DO INSTEAD
+CREATE RULE Measure_INSERT AS ON INSERT TO Alert DO INSTEAD
   INSERT INTO  Measure (tankId, level, time)
   VALUES ((select Id from Tank WHERE reference = NEW.tankReference), NEW.level, NEW.time)
   RETURNING Measure.id, (SELECT reference FROM Tank WHERE Id = Measure.tankId), Measure.level, Measure.time;
+
+CREATE VIEW Users AS
+SELECT c.FirstName, c.LastName, ci.Email, l.Login, l.Password
+FROM ContactLogin AS cl
+INNER JOIN Login AS l ON l.Id = cl.LoginId
+INNER JOIN Contact AS c ON c.Id = cl.ContactId
+INNER JOIN ContactInfo AS ci ON ci.Id = c.ContactInfoId;
 
 
 --
