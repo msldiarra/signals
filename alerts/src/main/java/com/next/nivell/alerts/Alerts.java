@@ -1,7 +1,7 @@
 package com.next.nivell.alerts;
 
 
-import com.next.nivell.alerts.model.Alert;
+import com.next.nivell.alerts.model.alert.Alert;
 import com.next.nivell.alerts.model.AlertPersistenceUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

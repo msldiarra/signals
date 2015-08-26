@@ -1,4 +1,4 @@
-package com.next.nivell.alerts.model;
+package com.next.nivell.alerts.model.alert;
 
 
 import javax.persistence.*;
