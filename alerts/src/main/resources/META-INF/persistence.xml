@@ -5,9 +5,17 @@
              version="2.1">
 
 
-<persistence-unit name="Alerts">
+    <persistence-unit name="Alerts">
         <jta-data-source>java:jboss/datasources/AlertsDS</jta-data-source>
-        <class>com.next.nivell.alerts.model.Alert</class>
+        <class>com.next.nivell.alerts.model.alert.Alert</class>
+        <properties>
+            <!--<property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>-->
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="Users">
+        <jta-data-source>java:jboss/datasources/AlertsDS</jta-data-source>
+        <class>com.next.nivell.alerts.model.user.User</class>
         <properties>
             <!--<property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>-->
