@@ -1,4 +1,4 @@
-var BASE_URL = '/rs/users/';
+var BASE_URL = '/nivell/rs/users/';
 export default {
   BASE_URL: BASE_URL,
   LOGIN_URL: BASE_URL,

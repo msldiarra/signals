@@ -7,14 +7,15 @@ class AuthService {
 
   login(username, password) {
 
-    var encoded = new Buffer(username + ':' + password, 'base64');
+    var encoded = new Buffer(username + ':' + password).toString('base64');
 
     return this.handleAuth(when(request({
       url: LOGIN_URL,
-      method: 'POST',
+      method: 'HEAD',
       crossOrigin: true,
       type: 'json',
       headers: {
+            'X-Requested-With' : 'XMLHttpRequest',
             'Authorization' : 'Basic ' + encoded
       }
     })));
@@ -39,7 +40,7 @@ class AuthService {
   handleAuth(loginPromise) {
     return loginPromise
       .then(function(response) {
-        LoginActions.loginUser();
+        LoginActions.loginUser(true);
         return true;
       });
   }

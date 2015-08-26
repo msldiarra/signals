@@ -8,16 +8,17 @@ class LoginStore extends BaseStore {
   constructor() {
     super();
     this.subscribe(() => this._registerToActions.bind(this))
-    this._user = null;
+    this._isLoggedIn = null;
   }
 
   _registerToActions(action) {
     switch(action.actionType) {
       case LOGIN_USER:;
-        this._user = action.user;
+        this._isLoggedIn = action.isLoggedIn;
         this.emitChange();
         break;
       case LOGOUT_USER:
+        this._isLoggedIn = false;
         this._user = null;
         this.emitChange();
         break;
@@ -31,7 +32,7 @@ class LoginStore extends BaseStore {
   }
 
   isLoggedIn() {
-    return !!this._user;
+    return this._isLoggedIn;
   }
 }
 

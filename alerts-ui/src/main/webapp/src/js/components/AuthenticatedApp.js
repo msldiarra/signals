@@ -35,7 +35,7 @@ export default class AuthenticatedApp extends React.Component {
       <div className="container">
         <nav className="navbar navbar-default">
           <div className="navbar-header">
-            <a className="navbar-brand" href="/">React Flux app with JWT authentication</a>
+            <a className="navbar-brand" href="/">Nivell</a>
           </div>
           {this.headerItems}
         </nav>
@@ -65,9 +65,6 @@ export default class AuthenticatedApp extends React.Component {
       <ul className="nav navbar-nav navbar-right">
         <li>
           <Link to="home">Home</Link>
-        </li>
-        <li>
-          <Link to="quote">Quote</Link>
         </li>
         <li>
           <a href="" onClick={this.logout}>Logout</a>
