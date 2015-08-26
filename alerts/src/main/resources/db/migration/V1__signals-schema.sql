@@ -125,7 +125,7 @@ CREATE RULE Measure_INSERT AS ON INSERT TO Alert DO INSTEAD
   RETURNING Measure.id, (SELECT reference FROM Tank WHERE Id = Measure.tankId), Measure.level, Measure.time;
 
 CREATE VIEW Users AS
-SELECT c.FirstName, c.LastName, ci.Email, l.Login, l.Password
+SELECT c.FirstName, c.LastName, ci.Email, l.Login, l.Password, l.Enabled
 FROM ContactLogin AS cl
 INNER JOIN Login AS l ON l.Id = cl.LoginId
 INNER JOIN Contact AS c ON c.Id = cl.ContactId

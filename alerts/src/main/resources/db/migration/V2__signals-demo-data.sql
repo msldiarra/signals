@@ -17,7 +17,8 @@ INSERT INTO CustomerStation VALUES (1,1);
 
 INSERT INTO TankShape (Shape) VALUES ('cylinder');
 INSERT INTO TankSize (Width, Height, ShapeId) VALUES (15, 35, 1);
-
+INSERT INTO Login (Login, Password, Enabled) VALUES ('admin','dnaqr7AnyCW9mrq3iyNAcOcCdS9iW3UuVeVbSOYH41g=','1');
+INSERT INTO ContactLogin VALUES (1,1);
 
 
 INSERT INTO Tank (Name, Reference, StationId, WarningLevelPercentage, LiquidTypeId, Enabled) VALUES
