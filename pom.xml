@@ -44,6 +44,7 @@
         <version.wildfly.plugin>1.0.2.Final</version.wildfly.plugin>
         <version.weld-se>2.2.5.Final</version.weld-se>
         <version.akka.actors>2.3.6</version.akka.actors>
+        <version.querydsl>3.3.3</version.querydsl>
     </properties>
 
     <dependencyManagement>
@@ -55,6 +56,19 @@
                 <artifactId>javaee-api</artifactId>
                 <version>${version.javaee}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- Query DSL -->
+            <dependency>
+                <groupId>com.mysema.querydsl</groupId>
+                <artifactId>querydsl-apt</artifactId>
+                <version>${version.querydsl}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mysema.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${version.querydsl}</version>
             </dependency>
 
             <!-- Test dependencies -->

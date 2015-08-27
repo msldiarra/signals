@@ -21,4 +21,12 @@
             <property name="hibernate.format_sql" value="true"/>-->
         </properties>
     </persistence-unit>
+    <persistence-unit name="TanksInAlert">
+        <jta-data-source>java:jboss/datasources/AlertsDS</jta-data-source>
+        <class>com.next.nivell.alerts.model.tank.TankInAlert</class>
+        <properties>
+            <!--<property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>-->
+        </properties>
+    </persistence-unit>
 </persistence>
