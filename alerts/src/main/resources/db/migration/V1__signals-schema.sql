@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS Tank (
   Description VARCHAR(255) NOT NULL DEFAULT 'NO_DESCRIPTION',
   WarningLevelPercentage INTEGER NOT NULL,
   LiquidTypeId INTEGER NOT NULL,
+  LevelTypeId INTEGER NOT NULL,
   Enabled BIT(1) NOT NULL DEFAULT '1',
   StartDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -27,6 +28,12 @@ CREATE TABLE IF NOT EXISTS Measure (
   TankId INTEGER NOT NULL,
   Level INTEGER NOT NULL,
   Time TIMESTAMP NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS LevelType (
+    Id SERIAL PRIMARY KEY,
+    LevelType VARCHAR(255) NOT NULL
 );
 
 
@@ -97,39 +104,65 @@ CREATE TABLE IF NOT EXISTS TankSize (
   ShapeId INTEGER NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS TankMaximumCapacity (
+  Id SERIAL PRIMARY KEY,
+  TankId INTEGER NOT NULL,
+  Volume INTEGER NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS TankTankSize (
   TankId INTEGER NOT NULL,
   TankSizeId INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Login (
-    Id SERIAL PRIMARY KEY,
-    Login VARCHAR(100) NOT NULL,
-    Password VARCHAR(100) NOT NULL,
-    Enabled bit(1) NOT NULL DEFAULT '1'
+  Id SERIAL PRIMARY KEY,
+  Login VARCHAR(100) NOT NULL,
+  Password VARCHAR(100) NOT NULL,
+  Enabled bit(1) NOT NULL DEFAULT '1'
 );
 
 CREATE TABLE IF NOT EXISTS ContactLogin (
-    ContactId INTEGER NOT NULL,
-    LoginId INTEGER NOT NULL
+  ContactId INTEGER NOT NULL,
+  LoginId INTEGER NOT NULL
 );
 
 CREATE VIEW Alert AS
-SELECT m.id, t.reference AS tankReference, m.level, m.time
-FROM Measure m
-INNER JOIN Tank t ON (t.id = m.id);
+  SELECT m.id, t.reference AS tankReference, m.level, m.time
+  FROM Measure m
+    INNER JOIN Tank t ON (t.id = m.id);
 
 CREATE RULE Measure_INSERT AS ON INSERT TO Alert DO INSTEAD
   INSERT INTO  Measure (tankId, level, time)
   VALUES ((select Id from Tank WHERE reference = NEW.tankReference), NEW.level, NEW.time)
   RETURNING Measure.id, (SELECT reference FROM Tank WHERE Id = Measure.tankId), Measure.level, Measure.time;
-
 CREATE VIEW Users AS
-SELECT c.FirstName, c.LastName, ci.Email, l.Login, l.Password, l.Enabled
-FROM ContactLogin AS cl
-INNER JOIN Login AS l ON l.Id = cl.LoginId
-INNER JOIN Contact AS c ON c.Id = cl.ContactId
-INNER JOIN ContactInfo AS ci ON ci.Id = c.ContactInfoId;
+  SELECT c.FirstName, c.LastName, ci.Email, l.Login, l.Password, l.Enabled
+  FROM ContactLogin AS cl
+    INNER JOIN Login AS l ON l.Id = cl.LoginId
+    INNER JOIN Contact AS c ON c.Id = cl.ContactId
+    INNER JOIN ContactInfo AS ci ON ci.Id = c.ContactInfoId;
+
+
+CREATE VIEW TanksInAlert AS
+  SELECT Tank.Id, Tank.Name AS Tank, Customer.Name as Customer, Station.Name AS Station, LiquidType.Reference AS LiquidType, Measure.Level, Measure.Time AS MeasureTime
+  FROM Station
+    INNER JOIN StationTank ON StationTank.StationId = Station.Id
+    INNER JOIN Tank ON tank.Id = StationTank.TankId
+    INNER JOIN LiquidType ON LiquidType.Id = Tank.LiquidTypeId
+    INNER JOIN (
+        SELECT TankId, Level, MAX(Time) AS Time
+            FROM Measure
+            GROUP BY TankId, Level
+    ) Measure ON Measure.TankId = Tank.Id
+    INNER JOIN CustomerStation ON customerStation.StationId = Station.Id
+    INNER JOIN Customer ON Customer.Id = CustomerStation.CustomerId
+    LEFT JOIN TankMaximumCapacity ON TankMaximumCapacity.TankId = Tank.Id
+  WHERE
+    CASE WHEN TankMaximumCapacity.Volume IS NOT NULL
+            THEN Measure.Level <= (TankMaximumCapacity.Volume * Tank.WarningLevelPercentage) / 100
+         ELSE FALSE
+         END;
 
 
 --
@@ -157,8 +190,8 @@ ALTER TABLE Contact
   ADD CONSTRAINT FK_Contact_ContactInfo FOREIGN KEY (ContactInfoId) REFERENCES ContactInfo (Id);
 
 ALTER TABLE Tank
-  ADD CONSTRAINT FK_Tank_Station FOREIGN KEY (StationId) REFERENCES Station (Id);
-
+  ADD CONSTRAINT FK_Tank_Station FOREIGN KEY (StationId) REFERENCES Station (Id),
+  ADD CONSTRAINT FK_Tank_LevelType FOREIGN KEY (LevelTypeId) REFERENCES LevelType (Id);
 ALTER TABLE CustomerContact
   ADD CONSTRAINT FK_CustomerContact_Contact FOREIGN KEY (ContactId) REFERENCES Contact (Id),
   ADD CONSTRAINT FK_CustomerContact_Customer FOREIGN KEY (CustomerId) REFERENCES Customer (Id);
@@ -176,3 +209,23 @@ ALTER TABLE TankTankSize
 ALTER TABLE ContactLogin
    ADD CONSTRAINT FK_ContactLogin_Login FOREIGN KEY (LoginId) REFERENCES Login (Id),
    ADD CONSTRAINT FK_ContactLogin_Contact FOREIGN KEY (ContactId) REFERENCES Contact (Id);
+
+ALTER TABLE TankMaximumCapacity
+   ADD CONSTRAINT FK_TankMaximumCapacity_Tank  FOREIGN KEY (TankId) REFERENCES Tank (Id);
+
+
+
+---
+--- INSERT REFERENCE DATA
+---
+
+INSERT INTO LiquidType (Reference) VALUES
+('GASOLINE'),
+('DIESEL SP 91');
+
+INSERT INTO ContactType (Type) VALUES
+('Owner'),
+('Manager');
+
+INSERT INTO LevelType (LevelType)
+VALUES ('VOLUME'), ('HEIGHT');
