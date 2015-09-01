@@ -35,7 +35,7 @@ INSERT INTO CustomerStation VALUES (2, 2), (2, 3), (2, 4);
 INSERT INTO TankShape (Shape) VALUES ('cylinder');
 INSERT INTO TankSize (Width, Height, ShapeId) VALUES (15, 35, 1);
 INSERT INTO Login (Login, Password, Enabled) VALUES ('harouna.niang','dnaqr7AnyCW9mrq3iyNAcOcCdS9iW3UuVeVbSOYH41g=','1');
-INSERT INTO Login (Login, Password, Enabled) VALUES ('pierre.grand','dnaqr7AnyCW9mrq3iyNAcOcCdS9iW3UuVeVbSOYH41g=','1');
+INSERT INTO Login (Login, Password, Enabled) VALUES ('admin','dnaqr7AnyCW9mrq3iyNAcOcCdS9iW3UuVeVbSOYH41g=','1');
 INSERT INTO ContactLogin VALUES (2,1);
 INSERT INTO ContactLogin VALUES (4,1);
 
