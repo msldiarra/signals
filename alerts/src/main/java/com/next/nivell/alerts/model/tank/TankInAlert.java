@@ -4,6 +4,7 @@ package com.next.nivell.alerts.model.tank;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @XmlRootElement
@@ -29,7 +30,7 @@ public class TankInAlert {
     private BigDecimal level;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private BigDecimal measureTime;
+    private Date measureTime;
 
 
     public String getTank() {
@@ -72,11 +73,11 @@ public class TankInAlert {
         this.level = level;
     }
 
-    public BigDecimal getMeasureTime() {
+    public Date getMeasureTime() {
         return measureTime;
     }
 
-    public void setMeasureTime(BigDecimal measureTime) {
+    public void setMeasureTime(Date measureTime) {
         this.measureTime = measureTime;
     }
 }
