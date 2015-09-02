@@ -18,9 +18,9 @@ var routes = (
 var router = Router.create({routes});
 RouterContainer.set(router);
 
-let isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
-if (isUserLoggedIn) {
-  LoginActions.loginUser(true);
+let user = localStorage.getItem('user');
+if (user) {
+  LoginActions.loginUser(user);
 }
 
 

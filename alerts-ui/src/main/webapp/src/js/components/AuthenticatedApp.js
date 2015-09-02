@@ -14,7 +14,8 @@ export default class AuthenticatedApp extends React.Component {
 
   _getLoginState() {
     return {
-      userLoggedIn: LoginStore.isLoggedIn()
+      userLoggedIn: LoginStore.isLoggedIn(),
+      user: LoginStore.user
     };
   }
 
@@ -67,7 +68,9 @@ export default class AuthenticatedApp extends React.Component {
                           <span className="icon-bar"></span>
                           <span className="icon-bar"></span>
                       </button>
-                      <a className="navbar-brand" href="#">NIVELL</a>
+                      <a className="navbar-brand" href="#">NIVELL
+                        <small>{this.state.user ? ' (' + this.state.user.company + ')': '' }</small>
+                      </a>
                   </div>
                   <div className="collapse navbar-collapse navbar-ex1-collapse">
                         {this.headerItems}

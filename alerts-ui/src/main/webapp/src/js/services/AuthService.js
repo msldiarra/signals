@@ -11,7 +11,7 @@ class AuthService {
 
     return this.handleAuth(when(request({
       url: LOGIN_URL,
-      method: 'HEAD',
+      method: 'GET',
       crossOrigin: true,
       type: 'json',
       headers: {
@@ -39,8 +39,8 @@ class AuthService {
 
   handleAuth(loginPromise) {
     return loginPromise
-      .then(function(response) {
-        LoginActions.loginUser(true);
+      .then(function(user) {
+        LoginActions.loginUser(user);
         return true;
       });
   }

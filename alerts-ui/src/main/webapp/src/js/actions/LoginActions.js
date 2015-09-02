@@ -4,23 +4,24 @@ import RouterContainer from '../services/RouterContainer.js';
 
 export default {
 
-  loginUser: (isLoggedIn) => {
+  loginUser: (user) => {
 
-    var nextPath =  null;
+    var savedUser = localStorage.getItem('user');
 
-    if (RouterContainer.get().getCurrentQuery()) {
+    console.log(savedUser);
+    console.log(user);
+
+    if (savedUser !== user) {
+
       var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
-    }
 
-    if(nextPath) {
-        RouterContainer.get().transitionTo(nextPath);
+      RouterContainer.get().transitionTo(nextPath);
+      localStorage.setItem('user', user);
     }
-
-    localStorage.setItem('isUserLoggedIn', true);
 
     AppDispatcher.dispatch({
       actionType: LOGIN_USER,
-      isLoggedIn: isLoggedIn
+      user: user
     });
   },
 
@@ -28,7 +29,7 @@ export default {
   logoutUser: () => {
 
     RouterContainer.get().transitionTo('/login');
-    localStorage.removeItem('isUserLoggedIn');
+    localStorage.removeItem('user');
 
     AppDispatcher.dispatch({
       actionType: LOGOUT_USER
