@@ -136,12 +136,16 @@ CREATE RULE Measure_INSERT AS ON INSERT TO Alert DO INSTEAD
   INSERT INTO  Measure (tankId, level, time)
   VALUES ((select Id from Tank WHERE reference = NEW.tankReference), NEW.level, NEW.time)
   RETURNING Measure.id, (SELECT reference FROM Tank WHERE Id = Measure.tankId), Measure.level, Measure.time;
+
+
 CREATE VIEW Users AS
-  SELECT c.FirstName, c.LastName, ci.Email, l.Login, l.Password, l.Enabled
+  SELECT c.FirstName, c.LastName, ci.Email, l.Login, l.Password, l.Enabled, cu.Name AS Company
   FROM ContactLogin AS cl
     INNER JOIN Login AS l ON l.Id = cl.LoginId
     INNER JOIN Contact AS c ON c.Id = cl.ContactId
-    INNER JOIN ContactInfo AS ci ON ci.Id = c.ContactInfoId;
+    INNER JOIN ContactInfo AS ci ON ci.Id = c.ContactInfoId
+    INNER JOIN CustomerContact AS cc ON cc.ContactId = c.Id
+    INNER JOIN Customer cu ON cu.Id = cc.CustomerId;
 
 
 CREATE VIEW TanksInAlert AS

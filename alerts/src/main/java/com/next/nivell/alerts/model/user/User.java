@@ -4,7 +4,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
-@Entity
+@Entity(name="com.next.nivell.alerts.model.user.User")
+@Table(name = "Users")
 @XmlRootElement
 public class User {
 
@@ -29,12 +30,16 @@ public class User {
 
     private Boolean enabled;
 
-    public User(String firstName, String lastName, String login, String password, String email) {
+    @Column(nullable = false)
+    private String company;
+
+    public User(String firstName, String lastName, String login, String password, String email, String company) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.email = email;
+        this.company = company;
     }
 
     @PrePersist
@@ -96,5 +101,13 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }
