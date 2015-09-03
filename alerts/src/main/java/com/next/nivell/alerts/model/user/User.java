@@ -33,6 +33,9 @@ public class User {
     @Column(nullable = false)
     private String company;
 
+    public User() {
+    }
+
     public User(String firstName, String lastName, String login, String password, String email, String company) {
         this.firstName = firstName;
         this.lastName = lastName;

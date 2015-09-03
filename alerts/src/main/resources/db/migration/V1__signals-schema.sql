@@ -139,7 +139,7 @@ CREATE RULE Measure_INSERT AS ON INSERT TO Alert DO INSTEAD
 
 
 CREATE VIEW Users AS
-  SELECT c.FirstName, c.LastName, ci.Email, l.Login, l.Password, l.Enabled, cu.Name AS Company
+  SELECT c.Id, c.FirstName, c.LastName, ci.Email, l.Login, l.Password, l.Enabled, cu.Name AS Company
   FROM ContactLogin AS cl
     INNER JOIN Login AS l ON l.Id = cl.LoginId
     INNER JOIN Contact AS c ON c.Id = cl.ContactId
