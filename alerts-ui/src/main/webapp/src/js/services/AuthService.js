@@ -17,7 +17,8 @@ class AuthService {
       headers: {
             'X-Requested-With' : 'XMLHttpRequest',
             'Authorization' : 'Basic ' + encoded
-      }
+      },
+      data: [{name:'login', value: username}]
     })));
   }
 
