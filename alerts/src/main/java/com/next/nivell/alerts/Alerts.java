@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
+import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.*;
@@ -39,6 +40,7 @@ public class Alerts {
     }
 
     @POST
+    @PermitAll
     public Response create(Alert alert) {
 
         jmsContext.createProducer().send(demoQueue, alert);

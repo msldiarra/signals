@@ -60,6 +60,17 @@ INSERT INTO Tank (Name, Reference, StationId, WarningLevelPercentage, LiquidType
 ('Cuve Gazoil SP 91', 'A00000000000009', 4, 25, 2, 1, '1'),
 ('Cuve essence', 'A00000000000010', 4, 25, 1, 1, '1');
 
+INSERT INTO StationTank VALUES
+(1,1),
+(1,2),
+(1,3),
+(2,4),
+(3,5),
+(3,6),
+(3,7),
+(3,8),
+(4,9),
+(4,10);
 
 INSERt INTO TankTankSize VALUES
 (1,1),

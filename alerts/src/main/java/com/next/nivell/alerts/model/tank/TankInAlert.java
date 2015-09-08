@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Entity
 @XmlRootElement
+@Table(name = "TanksInAlert")
 public class TankInAlert {
 
     @Id

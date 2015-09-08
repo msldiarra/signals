@@ -2,6 +2,7 @@ package com.next.nivell.system;
 
 import com.next.nivell.alerts.Alerts;
 import com.next.nivell.alerts.Users;
+import com.next.nivell.tank.Tanks;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -16,6 +17,7 @@ public class ApplicationConfig extends Application {
         Set<Class<?>> classes = new HashSet<>();
         classes.add(Alerts.class);
         classes.add(Users.class);
+        classes.add(Tanks.class);
         return classes;
     }
 }
