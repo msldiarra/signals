@@ -1,0 +1,1 @@
+curl -i -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d '{"tankReference":"A00000000000003","level":90,"time":"2015-06-28'T'15:35:09.000Z"}'  http://localhost:8080/nivell/rs/alerts
