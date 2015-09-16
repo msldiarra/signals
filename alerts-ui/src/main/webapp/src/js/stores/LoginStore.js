@@ -14,7 +14,7 @@ class LoginStore extends BaseStore {
 
   _registerToActions(action) {
     switch(action.actionType) {
-      case LOGIN_USER:;
+      case LOGIN_USER:
         this._user = action.user;
         this.emitChange();
         break;

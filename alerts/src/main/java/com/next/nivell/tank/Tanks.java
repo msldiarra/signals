@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/tanks")
-@Consumes({"application/json"})
 @Produces({"application/json"})
 @Stateless
 public class Tanks {
@@ -30,6 +29,7 @@ public class Tanks {
     }
 
     @GET
+    @Consumes("*/*")
     @Path("/{customer}/alerted")
     public Response tanksInAlert(@PathParam("customer") @NotNull String customer) {
 

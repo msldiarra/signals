@@ -7,16 +7,15 @@ export default {
   loginUser: (user) => {
 
     var savedUser = localStorage.getItem('user');
-
-    console.log(savedUser);
-    console.log(user);
-
     if (savedUser !== user) {
 
       var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
 
       RouterContainer.get().transitionTo(nextPath);
-      localStorage.setItem('user', user);
+      localStorage.setItem('user', JSON.stringify(user));
+    }
+    else {
+      user = JSON.parse(user);
     }
 
     AppDispatcher.dispatch({

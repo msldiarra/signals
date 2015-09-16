@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS ContactLogin (
 CREATE VIEW Alert AS
   SELECT m.id, t.reference AS tankReference, m.level, m.time
   FROM Measure m
-    INNER JOIN Tank t ON (t.id = m.id);
+    INNER JOIN Tank t ON (t.id = m.tankId);
 
 CREATE RULE Measure_INSERT AS ON INSERT TO Alert DO INSTEAD
   INSERT INTO  Measure (tankId, level, time)

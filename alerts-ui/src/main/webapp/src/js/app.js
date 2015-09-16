@@ -19,7 +19,7 @@ var router = Router.create({routes});
 RouterContainer.set(router);
 
 let user = localStorage.getItem('user');
-if (user) {
+if (user != null) {
   LoginActions.loginUser(user);
 }
 

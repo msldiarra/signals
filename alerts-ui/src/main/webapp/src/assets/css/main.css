@@ -1,5 +1,5 @@
 html, body {
-    margin: 20 px
+    margin: 20px
 }
 body {
     background: #fff;font-family: "Droid sans", "Helvetica Neue",
@@ -13,13 +13,13 @@ body {
   font-size:18px;
   font-weight:200;
   line-height:30px;
-  background-color:# eee;
-  border-radius: 6 px;
-  padding: 60 px
+  background-color:#eee;
+  border-radius: 6px;
+  padding: 60px
 }
 
 .hero-unit h1 {
-    font-size: 60 px;
+    font-size: 60px;
     line-height: 1;
     letter-spacing: -1px;
 }
@@ -28,18 +28,18 @@ ul.dashboard {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 100 %
+    width: 100%
 }
 
 ul.dashboard li {
     background: #fff;margin: 0;
-    width: 100 % ;
+    width: 100% ;
     float: left;
-    height: 55 px;
+    height: 55px;
     line-height: 55px;
     vertical-align: middle;
-    border-bottom: 1px solid# ccc;
-    padding: 5 px 0
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0
 }
 
 ul.dashboard li span.station {
@@ -47,19 +47,19 @@ ul.dashboard li span.station {
 }
 
 ul.dashboard li span.box {
-    float: right;padding: 0 10 px;color: #fff
+    float: right;padding: 0 10px;color: #fff;
 }
 
 ul.tanks {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 100 %
+    width: 100%
 }
 ul.tanks li {
-    background: #fff;width: 100 % ;float: left;
-    height: 55 px;line-height: 55 px;vertical-align: middle;
-    padding: 5 px 0;margin: 0 0 10 px
+    background: #fff;width: 100% ;float: left;
+    height: 55px;line-height: 55px;vertical-align: middle;
+    padding: 5px 0;margin: 0 0 10px;
 }
 
 ul.tanks li span.tank {
@@ -68,26 +68,36 @@ ul.tanks li span.tank {
 }
 
 ul.tanks li span.station {
-    float: left;text-align: center;color: #fff;border: 1 px 0 1 px 1 px;border-top-left-radius: 18 px;border-bottom-left-radius: 18 px
+    float: left;text-align: center;color: #fff;
+    border-top: 1px;
+    border-right:0;
+    border-bottom: 1px;
+    border-left: 1px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px
 }
 
 ul.tanks li span.box {
-        float: right;color: #fff;color: #000;text-align:center;font-weight:600;border-top-right-radius:18px;border-bottom-right-radius:18px}.width60{width:59%;float:left;border-right:1px solid # 000;padding-right: 3 px
+    float: right;color: #fff;
+    color: #000;text-align:center;
+    font-weight:600;border-top-right-radius:18px;
+    border-bottom-right-radius:18px}.width60{width:59%;float:left;
+    border-right:1px solid #000;padding-right: 3px
 }
 .width40 {
-        width: 40 % ;float: left;text-align: center
+        width: 40% ;float: left;text-align: center
 }
 .width72 {
-        width: 61.2 %
+        width: 61.2%
 }
 .width23 {
-        width: 23.8 %
+        width: 23.8%
 }
 .width15 {
-        width: 12.75 %
+        width: 12.75%
 }
 .width85 {
-        width: 72.25 %
+        width: 72.25%
 }
 .red {
         background: red
@@ -100,16 +110,29 @@ ul.tanks li span.box {
 }
     
 .cblack {
-        color: #000!important}.progress{height:50px!important}.progress .bar{height:100%}.progress span{position:relative;top:0!important;z-index:2;color:# 3 F3F3F;text-align: center;width: 100 % ;font-size: 17 px;font-weight: 800;height: 50 px;line-height: 50 px;vertical-align: middle
+        color: #000!important
+}
+
+.progress{height:50px!important}
+
+.progress .bar{height:100%}
+.progress span{
+    position:relative;top:0!important;z-index:2;color:#3F3F3F;
+    text-align: center;width: 100% ;font-size: 17px;font-weight: 800;
+    height: 50px;line-height: 50px;vertical-align: middle
 }
 
 .progress-bar-sucess {
-        background-color: none;
-        background-color: #08BF61!important}.progress-bar-warning{background-color:none;background-color:# FFBD4B!important
+        background-color: transparent;
+        background-color: #08BF61!important
+}
+.progress-bar-warning{
+    background-color:transparent;
+    background-color:#FFBD4B!important
 }
 
 .progress-bar-danger {
-        background-color: none;
+        background-color: transparent;
         background-color: #FF6C39!important
 }
 
@@ -209,3 +232,19 @@ ul.tanks li span.box {
     color: #fff;
     background-color: #FF5722;
 }
+
+
+.progress{height:50px!important}.progress .bar{height:100%}
+
+.progress span {position:relative;top:0!important;
+    z-index:2;color:#3F3F3F;text-align: center;width: 100% ;
+    font-size: 17px;font-weight: 800;height: 50px;line-height: 50px;
+    vertical-align: middle
+}
+.progress-bar-sucess {
+    background-color:transparent;
+    background-color: #08BF61!important}
+
+.progress-bar-warning{background-color:transparent;background-color:#FFBD4B!important}
+
+.progress-bar-danger {background-color: transparent;background-color: #FF6C39!important}
