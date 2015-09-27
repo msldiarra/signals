@@ -1,4 +1,4 @@
-var BASE_URL = '/nivell/rs/users/';
+var BASE_URL = 'http://localhost:8080/nivell/rs/users/';
 export default {
   BASE_URL: BASE_URL,
   LOGIN_URL: BASE_URL,

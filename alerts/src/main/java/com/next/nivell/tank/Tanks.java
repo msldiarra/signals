@@ -38,7 +38,11 @@ public class Tanks {
                 .where(tankInAlert.customer.eq(customer))
                 .list(tankInAlert);
 
-        return Response.ok(results).build();
+        return Response.ok(results).header("Access-Control-Allow-Origin", "http://0.0.0.0:3000")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, X-Requested-With")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .header("Access-Control-Max-Age", "1209600").build();
     }
 
 }

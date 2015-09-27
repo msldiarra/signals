@@ -12,12 +12,13 @@ class AuthService {
     return this.handleAuth(when(request({
       url: LOGIN_URL,
       method: 'GET',
-      crossOrigin: true,
+      crossOrigin: false,
       type: 'json',
-      headers: {
+      //withCredentials: true,
+      /*headers: {
             'X-Requested-With' : 'XMLHttpRequest',
             'Authorization' : 'Basic ' + encoded
-      },
+      },*/
       data: [{name:'login', value: username}]
     })));
   }

@@ -51,7 +51,7 @@ export default class TanksInAlert extends React.Component {
         })
 
         return (
-            <div>
+            <div className="padding-25">
                 {bars}
             </div>
         );

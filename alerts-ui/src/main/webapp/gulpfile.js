@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
+var serve = require('gulp-serve');
 
 gulp.task('browserify', function () {
     browserify({
@@ -22,6 +23,8 @@ gulp.task('copy',function() {
         .pipe(gulp.dest('dist/assets'));
 });
 
-gulp.task('default',['browserify', 'copy'], function() {
+gulp.task('serve', serve('dist'));
+
+gulp.task('default',['browserify', 'copy', 'serve'], function() {
     return gulp.watch('src/**/*.*', ['browserify', 'copy'])
 });

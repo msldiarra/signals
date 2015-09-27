@@ -2,11 +2,12 @@ html, body {
     margin: 20px
 }
 body {
-    background: #fff;font-family: "Droid sans", "Helvetica Neue",
-    Helvetica,
-    Arial,
-    sans-serif;color: #333;padding-top:15px
+    background: #fff;font-family: 'Roboto', sans-serif;
+    color: #333;
+    padding-top:15px;
+    line-height:14px;
 }
+
 .hero-unit {
   margin:50px auto 0;
   width:300px;
@@ -108,12 +109,16 @@ ul.tanks li span.box {
 .grey {
         background: #eee
 }
-    
+
+
 .cblack {
         color: #000!important
 }
 
-.progress{height:50px!important}
+.progress {
+    height:50px!important;
+    margin-top: 10px;
+}
 
 .progress .bar{height:100%}
 .progress span{
@@ -136,7 +141,11 @@ ul.tanks li span.box {
         background-color: #FF6C39!important
 }
 
-.black {color: #3F3F3F!important}
+a {
+    text-decoration: none !important;
+}
+
+.black { color: #3F3F3F!important; }
 
 
 .form-signin {
@@ -183,8 +192,8 @@ ul.tanks li span.box {
     padding:10px;
 }
 
-.content { padding-top: 50px;}
-
+.content {}
+.padding-25 { margin-top: 50px; }
 .navbar-custom {
     background-color:#FF5722;
     color:#ffffff;
@@ -234,10 +243,12 @@ ul.tanks li span.box {
 }
 
 
-.progress{height:50px!important}.progress .bar{height:100%}
+.progress{height:50px!important}
+
+.progress .bar{height:100%}
 
 .progress span {position:relative;top:0!important;
-    z-index:2;color:#3F3F3F;text-align: center;width: 100% ;
+    z-index:2;color:#FFF5CD;text-align: center;width: 100% ;
     font-size: 17px;font-weight: 800;height: 50px;line-height: 50px;
     vertical-align: middle
 }
@@ -247,4 +258,4 @@ ul.tanks li span.box {
 
 .progress-bar-warning{background-color:transparent;background-color:#FFBD4B!important}
 
-.progress-bar-danger {background-color: transparent;background-color: #FF6C39!important}
+.progress-bar-danger {background-color: transparent;background-color: #FF5722!important;}

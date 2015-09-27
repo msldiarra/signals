@@ -28,11 +28,16 @@ public class TankInAlert {
     private String liquidType;
 
     @Column(nullable = false)
+    private String unit;
+
+    @Column(nullable = false)
     private BigDecimal level;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date measureTime;
 
+    @Column(nullable = false)
+    private BigDecimal FillingRate;
 
     public String getTank() {
         return tank;
@@ -41,6 +46,7 @@ public class TankInAlert {
     public void setTank(String tank) {
         this.tank = tank;
     }
+
 
     public String getCustomer() {
         return customer;
@@ -80,5 +86,21 @@ public class TankInAlert {
 
     public void setMeasureTime(Date measureTime) {
         this.measureTime = measureTime;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public BigDecimal getFillingRate() {
+        return FillingRate;
+    }
+
+    public void setFillingRate(BigDecimal fillingRate) {
+        FillingRate = fillingRate;
     }
 }

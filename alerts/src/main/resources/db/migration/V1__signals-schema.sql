@@ -32,8 +32,9 @@ CREATE TABLE IF NOT EXISTS Measure (
 
 
 CREATE TABLE IF NOT EXISTS LevelType (
-    Id SERIAL PRIMARY KEY,
-    LevelType VARCHAR(255) NOT NULL
+  Id SERIAL PRIMARY KEY,
+  LevelType VARCHAR(25) NOT NULL,
+  Unit VARCHAR(25) NOT NULL
 );
 
 
@@ -149,11 +150,13 @@ CREATE VIEW Users AS
 
 
 CREATE VIEW TanksInAlert AS
-  SELECT Tank.Id, Tank.Name AS Tank, Customer.Name as Customer, Station.Name AS Station, LiquidType.Reference AS LiquidType, Measure.Level, Measure.Time AS MeasureTime
+  SELECT Tank.Id, Tank.Name AS Tank, Customer.Name as Customer, Station.Name AS Station, LiquidType.Reference AS LiquidType, Measure.Level, LevelType.Unit, Measure.Time AS MeasureTime,
+    round(((Measure.Level::float / TankMaximumCapacity.Volume) * 100)::numeric, 2) AS FIllingRate
   FROM Station
     INNER JOIN StationTank ON StationTank.StationId = Station.Id
     INNER JOIN Tank ON tank.Id = StationTank.TankId
     INNER JOIN LiquidType ON LiquidType.Id = Tank.LiquidTypeId
+    INNER JOIN LevelType ON LevelType.Id = Tank.LevelTypeId
     INNER JOIN (
         SELECT TankId, Level, MAX(Time) AS Time
             FROM Measure
@@ -217,7 +220,8 @@ ALTER TABLE ContactLogin
 ALTER TABLE TankMaximumCapacity
    ADD CONSTRAINT FK_TankMaximumCapacity_Tank  FOREIGN KEY (TankId) REFERENCES Tank (Id);
 
-
+ALTER TABLE LevelType
+    ADD CONSTRAINT UK_LevelType_Unit UNIQUE(LevelType,Unit);
 
 ---
 --- INSERT REFERENCE DATA
@@ -231,5 +235,5 @@ INSERT INTO ContactType (Type) VALUES
 ('Owner'),
 ('Manager');
 
-INSERT INTO LevelType (LevelType)
-VALUES ('VOLUME'), ('HEIGHT');
+INSERT INTO LevelType (LevelType, Unit)
+VALUES ('VOLUME','L'), ('HEIGHT', 'M');
