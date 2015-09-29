@@ -157,11 +157,12 @@ CREATE VIEW TanksInAlert AS
     INNER JOIN Tank ON tank.Id = StationTank.TankId
     INNER JOIN LiquidType ON LiquidType.Id = Tank.LiquidTypeId
     INNER JOIN LevelType ON LevelType.Id = Tank.LevelTypeId
+    INNER JOIN Measure ON Tank.id = Measure.TankId
     INNER JOIN (
-        SELECT TankId, Level, MAX(Time) AS Time
-            FROM Measure
-            GROUP BY TankId, Level
-    ) Measure ON Measure.TankId = Tank.Id
+                 SELECT DISTINCT ON(TankId) Id, Time
+                 FROM Measure
+                 ORDER BY TankId, Time DESC
+               ) LatestMeasure ON Measure.Id = LatestMeasure .Id
     INNER JOIN CustomerStation ON customerStation.StationId = Station.Id
     INNER JOIN Customer ON Customer.Id = CustomerStation.CustomerId
     LEFT JOIN TankMaximumCapacity ON TankMaximumCapacity.TankId = Tank.Id
@@ -170,6 +171,7 @@ CREATE VIEW TanksInAlert AS
             THEN Measure.Level <= (TankMaximumCapacity.Volume * Tank.WarningLevelPercentage) / 100
          ELSE FALSE
          END;
+
 
 
 --
