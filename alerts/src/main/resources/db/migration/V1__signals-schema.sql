@@ -162,7 +162,7 @@ CREATE VIEW TanksInAlert AS
                  SELECT DISTINCT ON(TankId) Id, Time
                  FROM Measure
                  ORDER BY TankId, Time DESC
-               ) LatestMeasure ON Measure.Id = LatestMeasure .Id
+               ) LatestMeasure ON Measure.Id = LatestMeasure.Id
     INNER JOIN CustomerStation ON customerStation.StationId = Station.Id
     INNER JOIN Customer ON Customer.Id = CustomerStation.CustomerId
     LEFT JOIN TankMaximumCapacity ON TankMaximumCapacity.TankId = Tank.Id
@@ -172,7 +172,16 @@ CREATE VIEW TanksInAlert AS
          ELSE FALSE
          END;
 
-
+CREATE VIEW TankMonitoring AS
+  SELECT
+    M1.TankId as Id,
+    M1.MeasureCount,
+    M2.OldestMeasureTime,
+    M3.LatestMeasureTime,
+    M3.LatestMeasureLevel
+  FROM (SELECT TankId, COUNT(Id) AS MeasureCount FROM Measure GROUP BY TankId ) M1
+  INNER JOIN (SELECT TankId, TIME AS OldestMeasureTime FROM Measure ORDER BY TankId, Time ASC LIMIT 1) M2 ON M1.TankId = M2.TankId
+  INNER JOIN (SELECT TankId, TIME AS LatestMeasureTime, Level AS LatestMeasureLevel FROM Measure ORDER BY TankId, Time DESC LIMIT 1) M3 ON M1.TankId = M3.TankId;
 
 --
 -- Constraints
