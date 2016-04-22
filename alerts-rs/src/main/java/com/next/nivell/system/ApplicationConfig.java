@@ -21,8 +21,6 @@ public class ApplicationConfig extends Application {
 
         classes.add(RESTCorsDevResponseFilter.class);
         classes.add(Alerts.class);
-        classes.add(Users.class);
-        classes.add(Tanks.class);
 
         return classes;
     }
