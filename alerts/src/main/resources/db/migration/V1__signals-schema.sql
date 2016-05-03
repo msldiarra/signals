@@ -180,7 +180,7 @@ CREATE VIEW TankMonitoring AS
     M3.LatestMeasureTime,
     M3.LatestMeasureLevel
   FROM (SELECT TankId, COUNT(Id) AS MeasureCount FROM Measure GROUP BY TankId ) M1
-  INNER JOIN (SELECT TankId, TIME AS OldestMeasureTime FROM Measure ORDER BY TankId, Time ASC LIMIT 1) M2 ON M1.TankId = M2.TankId
+  INNER JOIN (SELECT TankId, TIME AS OldestMeasureTime FROM Measure ORDER BY TankId, Measure.Id ASC LIMIT 1) M2 ON M1.TankId = M2.TankId
   INNER JOIN (SELECT TankId, TIME AS LatestMeasureTime, Level AS LatestMeasureLevel FROM Measure ORDER BY TankId, Time DESC LIMIT 1) M3 ON M1.TankId = M3.TankId;
 
 --
