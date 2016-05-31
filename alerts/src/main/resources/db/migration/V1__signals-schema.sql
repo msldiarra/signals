@@ -170,7 +170,8 @@ CREATE VIEW TanksInAlert AS
     CASE WHEN TankMaximumCapacity.Volume IS NOT NULL
             THEN Measure.Level <= (TankMaximumCapacity.Volume * Tank.WarningLevelPercentage) / 100
          ELSE FALSE
-         END;
+         END
+    ORDER BY FIllingRate ASC;
 
 CREATE VIEW TankMonitoring AS
   SELECT
@@ -182,6 +183,39 @@ CREATE VIEW TankMonitoring AS
   FROM (SELECT TankId, COUNT(Id) AS MeasureCount FROM Measure GROUP BY TankId ) M1
   INNER JOIN (SELECT TankId, TIME AS OldestMeasureTime FROM Measure ORDER BY TankId, Measure.Id ASC LIMIT 1) M2 ON M1.TankId = M2.TankId
   INNER JOIN (SELECT TankId, TIME AS LatestMeasureTime, Level AS LatestMeasureLevel FROM Measure ORDER BY TankId, Measure.Id DESC LIMIT 1) M3 ON M1.TankId = M3.TankId;
+
+CREATE VIEW Stations AS
+  SELECT
+    s.Id,
+    s.Name,
+    s.Reference,
+    c.Name AS Customer
+  FROM Station s
+  INNER JOIN CustomerStation cs ON s.Id = cs.StationId
+  INNER JOIN Customer c ON cs.CustomerId = c.id;
+
+
+
+CREATE VIEW StationTankView AS
+  SELECT Station.Id as StationId, Station.Name AS Station, Station.Reference AS StationReference, Tank.Id, Tank.Name AS Tank, Customer.Name as Customer, LiquidType.Reference AS LiquidType, Measure.Level, LevelType.Unit, Measure.Time AS MeasureTime,
+                  round(((Measure.Level::float / TankMaximumCapacity.Volume) * 100)::numeric, 2) AS FIllingRate
+  FROM Station
+    INNER JOIN StationTank ON StationTank.StationId = Station.Id
+    INNER JOIN Tank ON tank.Id = StationTank.TankId
+    INNER JOIN LiquidType ON LiquidType.Id = Tank.LiquidTypeId
+    INNER JOIN LevelType ON LevelType.Id = Tank.LevelTypeId
+    INNER JOIN Measure ON Tank.id = Measure.TankId
+    INNER JOIN (
+                 SELECT DISTINCT ON(TankId) Id, Time
+                 FROM Measure
+                 ORDER BY TankId, Time DESC
+               ) LatestMeasure ON Measure.Id = LatestMeasure.Id
+    INNER JOIN CustomerStation ON customerStation.StationId = Station.Id
+    INNER JOIN Customer ON Customer.Id = CustomerStation.CustomerId
+    LEFT JOIN TankMaximumCapacity ON TankMaximumCapacity.TankId = Tank.Id;
+
+
+
 
 --
 -- Constraints

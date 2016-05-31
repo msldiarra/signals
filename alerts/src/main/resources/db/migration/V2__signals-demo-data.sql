@@ -12,7 +12,8 @@ INSERT INTO Contact (FirstName, LastName, ContactInfoId, ContactTypeId) VALUES
 INSERT INTO Customer (Name) VALUES ('Petrolium Limited SA');
 INSERT INTO CustomerContact VALUES (1,1),(1,2);
 INSERT INTO Station (Name, Reference) VALUES ('Banankabougou', 'MLIBKOBNK000001');
-INSERT INTO CustomerStation VALUES (1,1);
+INSERT INTO Station (Name, Reference) VALUES ('Badalabougou Sema I', 'MLIBKOBDG000002');
+INSERT INTO CustomerStation VALUES (1,1), (1,2);
 
 --- Customer 2
 
@@ -29,7 +30,7 @@ INSERT INTO CustomerContact VALUES (2, 3), (2, 4);
 INSERT INTO Station (Name, Reference) VALUES ('Korofina', 'MLIBKOKFN000001');
 INSERT INTO Station (Name, Reference) VALUES ('Badalabougou Sema I', 'MLIBKOBDG000001');
 INSERT INTO Station (Name, Reference) VALUES ('Quartier du fleuve', 'MLIBKOQDF000001');
-INSERT INTO CustomerStation VALUES (2, 2), (2, 3), (2, 4);
+INSERT INTO CustomerStation VALUES (2, 3), (2, 4), (2, 5);
 
 
 INSERT INTO TankShape (Shape) VALUES ('cylinder');
@@ -42,23 +43,26 @@ INSERT INTO ContactLogin VALUES (4,1);
 
 INSERT INTO Tank (Name, Reference, StationId, WarningLevelPercentage, LiquidTypeId, LevelTypeId, Enabled) VALUES
 --- Station Petrolium Limited SA - Banankabougou
-('Cuve Essence', 'A00000000000001', 1, 30, 1, 1, '1'),
-('Cuve Gazoil SP 91', 'A00000000000002', 1, 30, 2, 1, '1'),
-('Cuve Gazoil SP 95', 'A00000000000003', 1, 30, 2, 1, '1'),
+('Cuve 1', 'A00000000000001', 1, 30, 1, 1, '1'),
+('Cuve 2', 'A00000000000002', 1, 30, 2, 1, '1'),
+('Cuve 3', 'A00000000000003', 1, 30, 2, 1, '1'),
+
+--- Station Petrolium Limited SA - Badalabougou
+('Cuve 1', 'A00000000000011', 2, 30, 1, 1, '1'),
 
 --- Station Mali Oil SARL - Korofina
-('Cuve Essence', 'A00000000000004', 2, 30, 1, 1, '1'),
+('Cuve 1', 'A00000000000004', 3, 30, 1, 1, '1'),
 
 --- Station Mali Oil SARL - Badalabougou
-('Cuve Gazoil SP 91', 'A00000000000005', 3, 25, 2, 1, '1'),
-('Cuve Gazoil SP 95', 'A00000000000006', 3, 25, 2, 1, '1'),
+('Cuve 1', 'A00000000000005', 4, 25, 2, 1, '1'),
+('Cuve 2', 'A00000000000006', 4, 25, 2, 1, '1'),
 
-('Cuve essence 1', 'A00000000000007', 3, 25, 1, 1, '1'),
-('Cuve essence 2', 'A00000000000008', 3, 25, 1, 1, '1'),
+('Cuve 3', 'A00000000000007', 4, 25, 1, 1, '1'),
+('Cuve 4', 'A00000000000008', 4, 25, 1, 1, '1'),
 
 --- Station Mali Oil SARL - Quartier du fleuve
-('Cuve Gazoil SP 91', 'A00000000000009', 4, 25, 2, 1, '1'),
-('Cuve essence', 'A00000000000010', 4, 25, 1, 1, '1');
+('Cuve 5', 'A00000000000009', 5, 25, 2, 1, '1'),
+('Cuve 6', 'A00000000000010', 5, 25, 1, 1, '1');
 
 INSERT INTO StationTank VALUES
 (1,1),
